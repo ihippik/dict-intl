@@ -23,7 +23,7 @@ struct Cli {
 
     /// The path to the source directory to read
     #[clap(short, long, value_parser)]
-    path: std::path::PathBuf,
+    source: std::path::PathBuf,
 }
 
 /// IntlError represent common service Error.
@@ -50,7 +50,7 @@ fn main() {
     let args = Cli::parse();
     let mut items = Vec::new();
 
-    for entry in WalkDir::new(args.path) {
+    for entry in WalkDir::new(args.source) {
         let path = match entry{
             Ok(p) => p,
             Err(error) => {
